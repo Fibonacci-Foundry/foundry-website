@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Not found · Fibonacci Foundry</title>
+<meta name="robots" content="noindex">
+<!-- NOTE · the one page whose asset paths are root-absolute, not relative.
+     GitHub Pages serves this file for any missing path at any depth
+     (/a/b/c renders 404.html while the address bar still reads /a/b/c),
+     so relative hrefs would resolve against /a/b/ and fetch nothing.
+     The house rule is relative paths; this is the documented exception. -->
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+<script>(function(){try{var m=localStorage.getItem('ff-mode');if(!m&&window.matchMedia){m=window.matchMedia('(prefers-color-scheme: dark)').matches?'nocturne':'vellum';}document.documentElement.dataset.mode=m||'vellum';}catch(e){document.documentElement.dataset.mode='vellum';}})();</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles/codex.css">
+</head>
+<body>
+
+<header>
+  <div class="sigil">
+    <svg viewBox="0 0 50 50" aria-hidden="true">
+      <g class="stroke-thin" stroke-width="0.8"><circle cx="25" cy="25" r="22"/><circle cx="25" cy="25" r="18" stroke-dasharray="1 2"/></g>
+      <g class="stroke" stroke-width="1.1"><rect x="8" y="28" width="17" height="17"/><rect x="25" y="28" width="10" height="10"/><rect x="25" y="38" width="6" height="6"/><rect x="8" y="5" width="27" height="23"/></g>
+      <path class="stroke-rubric" stroke-width="1.4" d="M8 45 Q8 28 25 28 Q35 28 35 38 Q35 45 31 45 Q28 45 28 42"/>
+    </svg>
+    <div class="nm">Fibonacci Foundry<small>· COMMONWEALTH OF VIRGINIA · ANNO MMXXVI ·</small></div>
+  </div>
+  <div class="chrome-right">
+    <nav>
+      <a href="/index.html">The Door</a>
+      <a href="/sustain.html">Sustain</a>
+      <a href="#" data-petition>Petition</a>
+    </nav>
+    <button class="mode-toggle" type="button" aria-pressed="false"><span class="gl">☉</span><span class="lab">vellum</span></button>
+  </div>
+</header>
+
+<main>
+<section class="notfound">
+  <div class="code">FOL. non inventa · 404</div>
+  <h1>This leaf is<br/>not in the book.</h1>
+  <div class="lat">quod quaeris hic non est.</div>
+  <div class="shadow">what you seek is not here.</div>
+  <a href="/" class="btn-illumin primary">Return to the door</a>
+</section>
+</main>
+
+<!-- ── CIPHER VEIL ── -->
+<div class="cipher-veil" id="cipher-veil" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="cipher-card">
+    <div class="x" id="cipher-x" role="button" tabindex="0" aria-label="close">[ &times; &nbsp;clavde&nbsp;]</div>
+    <div class="rubric-line">— Per Portas · de petitione —</div>
+    <h3>The door has no <em>form</em>.</h3>
+    <p>We answer by post, in the order in which sincere things arrive. The address is set down below — but the lock is in <em>basis sedecim</em>. Translate it carefully; we have found that those who cannot will not have written anything we wished to read.</p>
+    <div class="lat-line">— clavis non datur; inveniatur. —</div>
+    <div class="hex">70 65 74 69 74 69 6f 6e<span class="sep">@</span>66 69 62 6f 6e 61 63 63 69 66 6f 75 6e 64 72 79<span class="sep">.</span>6f 72 67</div>
+    <div class="hint">Each pair is one letter. <b>Read by eights, then by sixteens, then by threes.</b></div>
+    <div class="footnote">RESPONDEMUS · <span>INTRA · XIII · DIES</span> · NON OMNIBUS</div>
+  </div>
+</div>
+
+<script src="/scripts/cipher.js"></script>
+<script src="/scripts/mode.js"></script>
+</body>
+</html>

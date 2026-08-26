@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sustain · Fibonacci Foundry</title>
+<meta name="description" content="Slow work still costs. Give once, when it makes sense to you, or not at all.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://fibonaccifoundry.org/sustain.html">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fibonaccifoundry.org/sustain.html">
+<meta property="og:site_name" content="Fibonacci Foundry">
+<meta property="og:title" content="The work is slow on purpose.">
+<meta property="og:description" content="No recurring pledge, no membership tier. Give once, or not at all.">
+<meta property="og:image" content="https://fibonaccifoundry.org/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+
+<script>(function(){try{var m=localStorage.getItem('ff-mode');if(!m&&window.matchMedia){m=window.matchMedia('(prefers-color-scheme: dark)').matches?'nocturne':'vellum';}document.documentElement.dataset.mode=m||'vellum';}catch(e){document.documentElement.dataset.mode='vellum';}})();</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/codex.css">
+</head>
+<body>
+
+<a class="skip" href="#main">skip to content</a>
+
+<header>
+  <div class="sigil">
+    <svg viewBox="0 0 50 50" aria-hidden="true">
+      <g class="stroke-thin" stroke-width="0.8"><circle cx="25" cy="25" r="22"/><circle cx="25" cy="25" r="18" stroke-dasharray="1 2"/></g>
+      <g class="stroke" stroke-width="1.1"><rect x="8" y="28" width="17" height="17"/><rect x="25" y="28" width="10" height="10"/><rect x="25" y="38" width="6" height="6"/><rect x="8" y="5" width="27" height="23"/></g>
+      <path class="stroke-rubric" stroke-width="1.4" d="M8 45 Q8 28 25 28 Q35 28 35 38 Q35 45 31 45 Q28 45 28 42"/>
+    </svg>
+    <div class="nm">Fibonacci Foundry<small>· COMMONWEALTH OF VIRGINIA · ANNO MMXXVI ·</small></div>
+  </div>
+  <div class="chrome-right">
+    <nav>
+      <a href="index.html">The Door</a>
+      <a href="sustain.html" class="here">Sustain</a>
+      <a href="#" data-petition>Petition</a>
+    </nav>
+    <button class="mode-toggle" type="button" aria-pressed="false"><span class="gl">☉</span><span class="lab">vellum</span></button>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- A plate, not a banner. No progress bar, no urgency, no recurring
+     pledge, no membership tier, no default-selected amount. The ledger
+     states where the money goes BEFORE any amount is shown. -->
+<section class="sustain">
+  <div class="folio">FOL. 002 r</div>
+
+  <div class="rubric-line">Sustineo · to hold up</div>
+  <h1>The work is slow<br/>on purpose.</h1>
+  <p>Slow work still costs. Materials, a room to meet in, the postage that answers a petition. We take no recurring pledge and run no membership tier — give once, when it makes sense to you, or not at all.</p>
+
+  <div class="ledger">
+    <div><b>Materials</b>tools, stock, the bench</div>
+    <div><b>The room</b>where chapters meet</div>
+    <div><b>The post</b>every petition answered</div>
+  </div>
+
+  <div class="amt-row">
+    <button class="amt" type="button" aria-pressed="false" data-amount="21">$21<small>fib. viii</small></button>
+    <button class="amt" type="button" aria-pressed="false" data-amount="55">$55<small>fib. x</small></button>
+    <button class="amt" type="button" aria-pressed="false" data-amount="144">$144<small>fib. xii</small></button>
+    <button class="amt" type="button" aria-pressed="false">other<small>as you judge</small></button>
+  </div>
+
+  <!-- TODO before launch: set ZEFFY_URL at the top of scripts/sustain.js.
+       Until then this button is deliberately disabled and annotated. -->
+  <a id="give" class="btn-illumin primary" aria-disabled="true">Give by Zeffy →</a>
+  <div class="pending" id="give-pending" hidden>Zeffy form not yet configured — see scripts/sustain.js</div>
+
+  <p class="note-hand">Zeffy takes no cut. What you give is what arrives.</p>
+</section>
+
+</main>
+
+<div class="explicit">
+  <div class="ornament">❦ &nbsp; ✦ &nbsp; ❦ &nbsp; ✦ &nbsp; ❦</div>
+  <div class="explicit-grid">
+    <div class="ec"><h4>The Foundry</h4><p>A covenant bound by material limits, decentralized authority, and the discipline of skill.</p></div>
+    <div class="ec"><h4>Entrance</h4><a href="#" data-petition>petition →</a><a href="invited.html">if you were given a card</a></div>
+    <div class="ec"><h4>Sustain</h4><a href="sustain.html">sustineo →</a></div>
+    <div class="ec"><h4>Colophon</h4><p>Commonwealth of Virginia<br/>Anno MMXXVI</p><p><span class="smaragd" aria-label="emerald tablet">☉<span class="reveal"><i>quod est inferius, est sicut quod est superius</i><small>— Tabula Smaragdina, lin. ii —</small></span></span></p></div>
+  </div>
+</div>
+
+<!-- ── CIPHER VEIL ── -->
+<div class="cipher-veil" id="cipher-veil" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="cipher-card">
+    <div class="x" id="cipher-x" role="button" tabindex="0" aria-label="close">[ &times; &nbsp;clavde&nbsp;]</div>
+    <div class="rubric-line">— Per Portas · de petitione —</div>
+    <h3>The door has no <em>form</em>.</h3>
+    <p>We answer by post, in the order in which sincere things arrive. The address is set down below — but the lock is in <em>basis sedecim</em>. Translate it carefully; we have found that those who cannot will not have written anything we wished to read.</p>
+    <div class="lat-line">— clavis non datur; inveniatur. —</div>
+    <div class="hex">70 65 74 69 74 69 6f 6e<span class="sep">@</span>66 69 62 6f 6e 61 63 63 69 66 6f 75 6e 64 72 79<span class="sep">.</span>6f 72 67</div>
+    <div class="hint">Each pair is one letter. <b>Read by eights, then by sixteens, then by threes.</b></div>
+    <div class="footnote">RESPONDEMUS · <span>INTRA · XIII · DIES</span> · NON OMNIBUS</div>
+  </div>
+</div>
+
+<script src="scripts/cipher.js"></script>
+<script src="scripts/mode.js"></script>
+<script src="scripts/sustain.js"></script>
+</body>
+</html>

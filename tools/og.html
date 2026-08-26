@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" data-mode="vellum">
+<head>
+<meta charset="UTF-8">
+<title>OG plate · 1200 × 630</title>
+<!-- Source for /og.png. Not part of the deployed site — tools/ is
+     excluded from the Pages artifact. Regenerate with:
+       tools/build-og.sh
+     Spec: § 002 of the pattern sheet. Reuses the spiral figure.
+     No photograph, no face, no gradient. The Latin is the hook; the
+     English shadow is deliberately omitted — the card is a filter,
+     not an explainer. -->
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles/codex.css">
+<style>
+  html,body { margin:0; padding:0; width:1200px; height:630px; overflow:hidden; }
+  /* the ground textures on body are fixed-position and fine at this size */
+  .plate-og {
+    width:1200px; height:630px; box-sizing:border-box;
+    background:var(--paper); display:grid;
+    grid-template-columns:1.618fr 1fr; align-items:center; gap:34px;
+    padding:55px 89px;
+  }
+  .plate-og .mark {
+    font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:500;
+    font-size:96px; line-height:0.95; color:var(--ink); letter-spacing:-0.02em;
+    margin-top:18px;
+  }
+  .plate-og .mark .amp { color:var(--rubric); font-weight:400; }
+  .plate-og .lat {
+    font-family:'Cormorant Garamond',serif; font-style:italic;
+    font-size:30px; color:var(--sepia2); margin-top:21px;
+  }
+  .plate-og .rubric-line { font-size:13px; letter-spacing:0.36em; }
+</style>
+</head>
+<body>
+<div class="plate-og">
+  <div>
+    <div class="rubric-line">Commonwealth of Virginia · Anno MMXXVI</div>
+    <div class="mark">Fibonacci<br/><span class="amp">&amp;</span> Foundry</div>
+    <div class="lat">qui vidit, scit; reliqua tacenda.</div>
+  </div>
+  <svg viewBox="0 0 360 360" aria-hidden="true">
+    <!-- same corrected spiral as /, fewer construction squares — the card is
+         seen small. Regenerate, do not hand-edit. -->
+    <g class="stroke" stroke-width="0.7" opacity="0.7">
+      <rect x="94" y="147" width="173" height="173"/><rect x="94" y="40" width="107" height="107"/>
+      <rect x="201" y="40" width="66" height="66"/><rect x="226" y="106" width="41" height="41"/>
+    </g>
+    <g class="stroke-rubric" stroke-width="1.6">
+      <path d="M267 320 A173 173 0 0 1 94 147 A107 107 0 0 1 201 40 A66 66 0 0 1 267 106 A41 41 0 0 1 226 147 A25 25 0 0 1 201 122"/>
+    </g>
+  </svg>
+</div>
+</body>
+</html>

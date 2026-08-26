@@ -1,0 +1,84 @@
+name: Deploy site to Pages
+
+# Publishes an allowlist of paths rather than the whole repo.
+#
+# This repo is public and holds only shippable site files, so there is nothing
+# private to protect. The allowlist stays anyway for two reasons: tools/ is build
+# tooling that should not be served, and anything added later is not published
+# until it is named here on purpose. New public assets go in SITE_PATHS
+# deliberately, which is the safe direction to fail in.
+#
+# SETUP (one time):
+#   Settings -> Pages -> Build and deployment -> Source: GitHub Actions
+#   Settings -> Pages -> Custom domain: fibonaccifoundry.org
+# Pages is free from a public repo on any plan.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      SITE_PATHS: >-
+        index.html
+        invited.html
+        sustain.html
+        404.html
+        favicon.svg
+        og.png
+        CNAME
+        styles
+        scripts
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Stage the site
+        run: |
+          set -euo pipefail
+          mkdir -p _site
+          for p in $SITE_PATHS; do
+            if [ -e "$p" ]; then
+              cp -R "$p" _site/
+              echo "staged  $p"
+            else
+              echo "MISSING $p" >&2
+              exit 1
+            fi
+          done
+
+      - name: Confirm build tooling is not published
+        run: |
+          set -euo pipefail
+          for f in tools .github; do
+            if [ -e "_site/$f" ]; then
+              echo "REFUSING: _site/$f is present" >&2
+              exit 1
+            fi
+          done
+          find _site -type f | sort
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

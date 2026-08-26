@@ -14,7 +14,7 @@
      · plates           Discipline plates (with .alch-stamp)
      · hours            the rule of hours grid
      · writ             essay teasers (codex front) and indexes
-     · gate             vows + petition CTA
+     · gate             petition CTA
      · alchemy          smaragdina, athanor, stamps
      · cipher-veil      petition modal
      · longread         article / essay long-form (writings/*)
@@ -207,8 +207,6 @@ nav a.here { color:var(--rubric); border-color:var(--rubric); }
 .cipher-card .lat-line { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:18px; color:var(--rubric); margin:8px 0 21px; text-align:center; letter-spacing:0.01em; }
 .cipher-card .hex { font-family:'IBM Plex Mono',monospace; font-size:14px; letter-spacing:0.18em; color:var(--ink); padding:24px 18px; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); text-align:center; line-height:2; }
 .cipher-card .hex .sep { color:var(--rubric); font-family:'Cormorant Garamond',serif; font-style:italic; font-size:18px; letter-spacing:0; display:block; margin:4px 0; }
-.cipher-card .hint { font-family:'Caveat',cursive; font-size:17px; color:var(--sepia2); margin-top:18px; text-align:center; line-height:1.3; }
-.cipher-card .hint b { font-family:'EB Garamond',serif; font-style:italic; color:var(--rubric); font-weight:500; }
 .cipher-card .footnote { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:0.3em; color:var(--mute); text-transform:uppercase; margin-top:21px; text-align:center; }
 .cipher-card .footnote span { color:var(--rubric); }
 
@@ -233,11 +231,6 @@ nav a.here { color:var(--rubric); border-color:var(--rubric); }
 .gate-text h2 { font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:500; font-size:56px; margin:0 0 21px; line-height:1.05; letter-spacing:-0.02em; color:var(--ink); }
 .gate-text h2 em { color:var(--rubric); }
 .gate-text > p { font-size:19px; line-height:1.65; color:var(--sepia); margin:0 0 21px; font-style:italic; }
-.vows { margin:21px 0 34px; }
-.vow { display:grid; grid-template-columns:34px 1fr; gap:13px; padding:13px 0; border-bottom:1px dotted var(--rule); font-size:17px; line-height:1.45; }
-.vow:first-child { border-top:1px dotted var(--rule); }
-.vow .vn { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:21px; color:var(--rubric); font-weight:500; }
-.vow .vt em { font-style:italic; color:var(--rubric); }
 .gate-sketch { position:relative; padding:13px; }
 .gate-sketch svg.fig { width:100%; height:auto; display:block; aspect-ratio:1/1.05; }
 .gate-sketch .marg { position:absolute; font-family:'Caveat',cursive; color:var(--sepia2); font-size:17px; }
@@ -339,7 +332,6 @@ nav a.here { color:var(--rubric); border-color:var(--rubric); }
   .lr-marg { font-style:italic; padding:13px 21px; border-left:2px solid var(--rubric); margin:21px 0; text-align:left !important; max-width:none !important; justify-self:start !important; }
 }
 
-
 /* ═══════════════════════════════════════════════════════════════════
    NOCTURNE · the second mode
    Same hues, inverted lightness. The vellum becomes tallow-lit ink.
@@ -395,7 +387,6 @@ html[data-mode="nocturne"] body::after { mix-blend-mode:screen; opacity:0.26; }
 .notfound .code { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.4em; color:var(--rubric); text-transform:uppercase; margin-bottom:34px; }
 .notfound h1 { font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:500; font-size:72px; line-height:1; margin:0 0 21px; color:var(--ink); }
 .notfound .lat { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:21px; color:var(--sepia2); margin-bottom:13px; }
-.notfound .shadow { font-family:'EB Garamond',serif; font-size:15px; color:var(--mute); margin-bottom:55px; }
 
 /* ── DRAFT MARKER ─────────────────────────────────────────────────
    Anything the order has not yet set its hand to. */
@@ -404,7 +395,6 @@ html[data-mode="nocturne"] body::after { mix-blend-mode:screen; opacity:0.26; }
 
 /* buttons never wrap mid-label */
 .btn-illumin { white-space:nowrap; }
-
 
 /* ═══════════════════════════════════════════════════════════════════
    THE FRONT DOOR · blocks for /, /invited
@@ -439,14 +429,10 @@ html[data-mode="nocturne"] body::after { mix-blend-mode:screen; opacity:0.26; }
   margin:0 0 21px; max-width:440px;
 }
 .incipit.door .lede em { color:var(--rubric); }
-/* the Latin, with its English shadow held at a smaller size — the
-   shadow is a gloss, not a second sentence */
+/* the Latin line beneath the lede. No English gloss follows it. */
 .incipit.door .lat-shadow {
   font-family:'Cormorant Garamond',serif; font-style:italic;
   font-size:18px; color:var(--mute); margin:0 0 34px;
-}
-.incipit.door .lat-shadow small {
-  font-family:'EB Garamond',serif; font-style:normal; font-size:15px;
 }
 .door-cta { display:flex; gap:21px; align-items:center; flex-wrap:wrap; }
 .door-cta .or { font-family:'Caveat',cursive; font-size:18px; color:var(--sepia2); }
@@ -471,10 +457,6 @@ html[data-mode="nocturne"] body::after { mix-blend-mode:screen; opacity:0.26; }
   font-family:'Cormorant Garamond',serif; font-style:italic;
   font-size:21px; color:var(--sepia); margin-bottom:13px;
 }
-.closing .shadow {
-  font-family:'EB Garamond',serif; font-size:16px;
-  color:var(--mute); max-width:520px; margin:0 auto;
-}
 
 /* ── /invited · the card ───────────────────────────────────────────
    Single column and deliberately terminal. There is no CTA here by
@@ -491,8 +473,6 @@ html[data-mode="nocturne"] body::after { mix-blend-mode:screen; opacity:0.26; }
 }
 .invited .body { font-size:18px; line-height:1.7; color:var(--sepia); max-width:560px; }
 .invited .aside { font-family:'Caveat',cursive; font-size:20px; color:var(--sepia2); margin:34px 0; }
-.invited .sworn { border-top:1px solid var(--rule); padding-top:34px; margin-top:34px; }
-.invited .attest { font-size:16px; color:var(--mute); margin-top:21px; }
 
 /* ── narrow ────────────────────────────────────────────────────────
    The header stacks at 980px above, so the toggle group unhooks from
@@ -556,7 +536,6 @@ html[data-mode="nocturne"] body::after { mix-blend-mode:screen; opacity:0.26; }
   margin:0 0 21px; color:var(--ink);
 }
 .sustain > p:not(.note-hand) { font-size:18px; line-height:1.7; color:var(--sepia); max-width:560px; margin:0; }
-
 
 /* ═══════════════════════════════════════════════════════════════════
    PRINT · ink on paper
@@ -632,7 +611,7 @@ html[data-mode="nocturne"] body::after { mix-blend-mode:screen; opacity:0.26; }
   .notfound { padding:34px 0; }
 
   /* ── do not break these across sheets ────────────────────────────── */
-  .vow, .ledger, .ledger div, .explicit, .plate, .h-cell {
+  .ledger, .ledger div, .explicit, .plate, .h-cell {
     page-break-inside:avoid; break-inside:avoid;
   }
   h1, h2, h3, .rubric-line {

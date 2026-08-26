@@ -11,7 +11,7 @@
      https://www.zeffy.com/en-US/donation-form/<form-id>
    ═══════════════════════════════════════════════════════════════════ */
 
-var ZEFFY_URL = '';
+var ZEFFY_URL = 'https://www.zeffy.com/en-US/donation-form/donate-for-a-better-future-2';
 
 (function () {
   function init() {

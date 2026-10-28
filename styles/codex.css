@@ -1,0 +1,616 @@
+/* ═══════════════════════════════════════════════════════════════════
+   FIBONACCI FOUNDRY · shared stylesheet · Codex Fibonacci
+   Loaded by every page. Page-specific CSS lives in a <style> block
+   in that page's <head>, BELOW this import.
+   ─────────────────────────────────────────────────────────────────
+   sections, in order:
+     · tokens           variables for color, type, rule
+     · base             reset + body + paper texture
+     · primitives       hand strokes, mono/disp/hand fonts
+     · chrome           header, sigil, nav, folio, footer/explicit
+     · incipit          hero block (h1 + subtitle + sotto)
+     · buttons          .btn-illumin + .primary
+     · chapter          spread layout, verses w/ drop cap, sketch
+     · plates           Discipline plates (with .alch-stamp)
+     · hours            the rule of hours grid
+     · writ             essay teasers (codex front) and indexes
+     · gate             call-to-action block
+     · alchemy          stamps
+     · longread         article / essay long-form (writings/*)
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  --paper:#e8dcc0; --paper2:#decea8; --paper3:#c9b585;
+  --sepia:#3a2410; --sepia2:#5a3a18; --sepia3:#7a5028;
+  --rule:#8b6a3a; --rubric:#8b2a1a; --gold:#a8742a;
+  --mute:#7a6038; --ink:#1f1408;
+}
+*,*::before,*::after { box-sizing:border-box; }
+html,body { margin:0; padding:0; background:var(--paper); color:var(--sepia); font-family:'EB Garamond',serif; font-size:18px; line-height:1.7; }
+body { overflow-x:hidden; }
+a { color:inherit; text-decoration:none; }
+
+/* aged vellum + foxing */
+body::before {
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+  background-image:
+    radial-gradient(ellipse at 15% 8%, rgba(122,80,40,0.22) 0, transparent 35%),
+    radial-gradient(ellipse at 92% 92%, rgba(139,42,26,0.10) 0, transparent 40%),
+    radial-gradient(ellipse at 75% 25%, rgba(160,110,40,0.14) 0, transparent 25%),
+    radial-gradient(ellipse at 30% 75%, rgba(120,70,30,0.12) 0, transparent 30%),
+    radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(60,30,10,0.12) 100%);
+}
+body::after {
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:1;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='360' height='360'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.45' numOctaves='3'/><feColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.22 0 0 0 0 0.06 0 0 0 0.22 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  mix-blend-mode:multiply; opacity:0.75;
+}
+main, header, footer { position:relative; z-index:2; }
+
+/* primitive utilities */
+.hand { font-family:'Caveat',cursive; color:var(--sepia2); }
+.mono { font-family:'IBM Plex Mono',monospace; }
+.disp { font-family:'Cormorant Garamond',serif; }
+
+/* sketch line presets (for SVG plates) */
+.stroke { stroke:var(--sepia); fill:none; stroke-linecap:round; stroke-linejoin:round; }
+.stroke-thin { stroke:var(--sepia2); fill:none; stroke-width:0.5; stroke-linecap:round; }
+.stroke-rubric { stroke:var(--rubric); fill:none; stroke-linecap:round; }
+
+/* ── HEADER ── */
+header { padding:21px 55px 13px; border-bottom:1px solid var(--rule); display:flex; justify-content:space-between; align-items:center; gap:34px; flex-wrap:nowrap; }
+.sigil { display:flex; align-items:center; gap:18px; }
+.sigil svg { width:46px; height:46px; }
+.sigil .nm { font-family:'Cormorant Garamond',serif; font-weight:500; font-size:26px; letter-spacing:0.03em; font-style:italic; line-height:1; }
+.sigil .nm small { display:block; font-family:'IBM Plex Mono',monospace; font-style:normal; font-size:9px; letter-spacing:0.3em; color:var(--mute); text-transform:uppercase; margin-top:6px; }
+.hdr-meta { font-family:'Caveat',cursive; font-size:18px; color:var(--sepia2); letter-spacing:0.02em; white-space:nowrap; flex:0 0 auto; }
+.hdr-meta b { font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:600; color:var(--ink); }
+nav { display:flex; gap:18px; font-family:'Cormorant Garamond',serif; font-size:13px; letter-spacing:0.2em; text-transform:uppercase; font-weight:500; white-space:nowrap; flex:0 0 auto; }
+nav a { padding:4px 0; border-bottom:1px solid transparent; color:var(--sepia); }
+nav a:hover { border-color:var(--rubric); color:var(--rubric); }
+nav a.here { color:var(--rubric); border-color:var(--rubric); }
+
+/* folio number, anchored to the page corner */
+.folio { position:absolute; top:21px; right:55px; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.32em; color:var(--mute); text-transform:uppercase; z-index:3; }
+
+/* ── INCIPIT / HERO ── */
+.incipit { padding:55px 55px 34px; max-width:1346px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:55px; border-bottom:1px solid var(--rule); position:relative; }
+.incipit.single { grid-template-columns:1fr; max-width:780px; }
+.incipit-text { padding-top:21px; }
+.rubric-line { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.36em; color:var(--rubric); text-transform:uppercase; margin-bottom:21px; display:flex; gap:13px; align-items:center; }
+.rubric-line::before { content:"❧"; font-size:16px; }
+.incipit h1 { font-family:'Cormorant Garamond',serif; font-weight:500; font-size:96px; line-height:0.95; margin:0 0 21px; letter-spacing:-0.02em; font-style:italic; color:var(--ink); }
+.incipit h1 .amp { color:var(--rubric); font-weight:400; }
+.incipit .subtitle { font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:400; font-size:26px; line-height:1.4; color:var(--sepia); margin:0 0 21px; }
+.incipit .subtitle em { color:var(--rubric); }
+
+/* sotto voce — the quiet call */
+.sotto { margin:34px 0; padding:21px 0 21px 21px; border-left:2px solid var(--rubric); max-width:520px; }
+.sotto p { font-family:'EB Garamond',serif; font-style:italic; font-size:18px; line-height:1.55; margin:0 0 8px; color:var(--ink); }
+.sotto .attribution { font-family:'Caveat',cursive; font-size:18px; color:var(--sepia2); margin-top:8px; }
+
+.incipit-cta { display:flex; gap:13px; flex-wrap:wrap; margin-top:21px; }
+.btn-illumin { font-family:'Cormorant Garamond',serif; font-size:14px; letter-spacing:0.22em; text-transform:uppercase; padding:13px 28px; background:transparent; color:var(--ink); border:1px solid var(--ink); cursor:pointer; font-weight:500; transition:all 0.3s; display:inline-block; text-align:center; }
+.btn-illumin:hover { background:var(--ink); color:var(--paper); }
+.btn-illumin.primary { background:var(--ink); color:var(--paper); }
+.btn-illumin.primary:hover { background:var(--rubric); border-color:var(--rubric); }
+.btn-illumin.quiet { border:none; padding:13px 0; color:var(--sepia2); }
+.btn-illumin.quiet:hover { background:transparent; color:var(--rubric); }
+
+/* hero plate — the figure */
+.plate-hero { position:relative; padding:21px; }
+.plate-hero svg.fig { width:100%; height:auto; aspect-ratio:1/1; display:block; }
+.plate-hero .annot { position:absolute; font-family:'Caveat',cursive; color:var(--sepia2); font-size:18px; line-height:1.2; pointer-events:none; }
+.plate-hero .annot.a1 { top:8%; left:-8px; transform:rotate(-4deg); max-width:140px; }
+.plate-hero .annot.a2 { top:34%; right:-12px; transform:rotate(3deg); max-width:160px; text-align:right; }
+.plate-hero .annot.a3 { bottom:18%; left:-4px; transform:rotate(2deg); max-width:170px; }
+.plate-hero .annot.a4 { bottom:4%; right:8%; transform:rotate(-2deg); }
+.plate-hero .annot b { font-family:'EB Garamond',serif; font-style:italic; font-weight:500; color:var(--rubric); display:block; font-size:14px; letter-spacing:0.05em; }
+.mirror { transform:scaleX(-1); display:inline-block; }
+
+/* ── CHAPTER (manifesto / verses + sketch spread) ── */
+.chapter { padding:89px 55px 55px; max-width:1100px; margin:0 auto; border-bottom:1px solid var(--rule); position:relative; }
+.chap-head { text-align:center; margin-bottom:55px; max-width:780px; margin-left:auto; margin-right:auto; }
+.chap-head .cn { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:18px; color:var(--rubric); letter-spacing:0.36em; text-transform:uppercase; margin-bottom:13px; font-weight:500; }
+.chap-head h2 { font-family:'Cormorant Garamond',serif; font-weight:500; font-size:46px; margin:0; font-style:italic; line-height:1.1; letter-spacing:-0.01em; color:var(--ink); }
+.chap-head h2 small { display:block; font-family:'EB Garamond',serif; font-style:italic; font-size:18px; color:var(--mute); margin-top:13px; letter-spacing:0.02em; font-weight:400; }
+
+.spread { display:grid; grid-template-columns:1fr 0.85fr; gap:55px; align-items:start; }
+.verses .verse { display:grid; grid-template-columns:42px 1fr; gap:18px; margin-bottom:21px; align-items:start; }
+.verses .verse .v { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:21px; color:var(--rubric); text-align:right; padding-top:3px; font-weight:500; }
+.verses .verse p { margin:0; font-size:19px; line-height:1.7; color:var(--ink); }
+.verses .verse:first-of-type p::first-letter {
+  font-family:'Cormorant Garamond',serif; font-weight:500; font-size:96px; line-height:0.85; float:left;
+  padding:6px 13px 0 0; color:var(--rubric); font-style:italic;
+}
+.verses .verse p em { color:var(--rubric); font-style:italic; }
+
+.sketch { position:relative; padding:13px; }
+.sketch svg.fig { width:100%; height:auto; display:block; }
+.sketch .caption { margin-top:13px; padding-top:13px; border-top:1px dashed var(--rule); font-family:'EB Garamond',serif; font-style:italic; font-size:15px; color:var(--sepia2); line-height:1.5; }
+.sketch .caption b { color:var(--ink); font-style:normal; font-weight:500; }
+.sketch .marg { position:absolute; font-family:'Caveat',cursive; color:var(--sepia2); font-size:17px; }
+
+.ornament { text-align:center; margin:34px 0 0; color:var(--rubric); font-size:18px; letter-spacing:0.6em; }
+
+/* ── DISCIPLINE PLATES ── */
+.disc { padding:89px 55px; max-width:1346px; margin:0 auto; border-bottom:1px solid var(--rule); }
+.disc-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:34px; }
+.plate { position:relative; padding:34px 21px; }
+.plate .roman { font-family:'Cormorant Garamond',serif; font-weight:400; font-style:italic; font-size:64px; color:var(--rubric); line-height:1; margin-bottom:8px; letter-spacing:-0.02em; }
+.plate .roman small { font-family:'IBM Plex Mono',monospace; font-style:normal; font-size:9px; letter-spacing:0.28em; color:var(--mute); text-transform:uppercase; display:block; margin-top:13px; font-weight:500; }
+.plate h3 { font-family:'Cormorant Garamond',serif; font-weight:500; font-style:italic; font-size:30px; margin:21px 0 13px; line-height:1.1; letter-spacing:-0.01em; color:var(--ink); }
+.plate .sub { font-family:'EB Garamond',serif; font-style:italic; font-size:16px; color:var(--rubric); margin-bottom:21px; }
+.plate .figure { margin:21px -8px; position:relative; aspect-ratio:1/0.78; }
+.plate .figure svg.fig { width:100%; height:100%; display:block; }
+.plate .figure .marg { position:absolute; font-family:'Caveat',cursive; color:var(--sepia2); font-size:15px; line-height:1.1; }
+.plate p { font-size:16px; line-height:1.6; color:var(--ink); margin:0 0 13px; }
+.plate .citation { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.22em; color:var(--mute); text-transform:uppercase; margin-top:21px; padding-top:13px; border-top:1px dotted var(--rule); }
+.plate .citation b { color:var(--rubric); }
+
+/* ── HOURS GRID ── */
+.hours { padding:89px 55px; max-width:1346px; margin:0 auto; border-bottom:1px solid var(--rule); }
+.h-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:21px; }
+.h-cell { position:relative; padding:18px 18px 16px; border:1px solid var(--rule); background:rgba(232,220,192,0.32); min-height:180px; display:flex; flex-direction:column; }
+.h-cell .glyph { height:42px; margin-bottom:13px; opacity:0.7; }
+.h-cell .glyph svg { height:100%; width:auto; display:block; }
+.h-cell .lat { font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:500; font-size:22px; line-height:1.05; color:var(--ink); letter-spacing:0.005em; }
+.h-cell.key .lat { color:var(--rubric); }
+.h-cell .role { font-family:'EB Garamond',serif; font-style:italic; font-size:14.5px; color:var(--sepia2); margin-top:8px; line-height:1.4; }
+.h-cell.key .role { color:var(--ink); }
+.h-cell .ord { font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:0.26em; color:var(--mute); text-transform:uppercase; margin-top:auto; padding-top:13px; display:flex; justify-content:space-between; align-items:baseline; gap:8px; }
+.h-cell .ord b { font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:500; font-size:14px; letter-spacing:0; text-transform:none; color:var(--sepia2); }
+.h-cell.key .ord b { color:var(--rubric); }
+.h-cell .marg { position:absolute; top:-10px; right:13px; font-family:'Caveat',cursive; color:var(--sepia3); font-size:14px; transform:rotate(-3deg); background:var(--paper); padding:0 6px; }
+
+/* ── ALCHEMY ── */
+.alch-stamp { position:absolute; top:21px; right:13px; width:46px; height:46px; display:flex; align-items:center; justify-content:center; pointer-events:none; opacity:0.78; }
+.alch-stamp::before { content:""; position:absolute; inset:0; border-radius:50%; border:0.6px solid var(--sepia3); }
+.alch-stamp::after { content:""; position:absolute; inset:4px; border-radius:50%; border:0.4px dashed var(--sepia3); opacity:0.5; }
+.alch-stamp .gl { font-family:'EB Garamond',serif; font-size:22px; color:var(--sepia2); position:relative; line-height:1; }
+.alch-stamp .lab { position:absolute; left:50%; bottom:-14px; transform:translateX(-50%); font-family:'IBM Plex Mono',monospace; font-size:7px; letter-spacing:0.22em; color:var(--mute); text-transform:uppercase; white-space:nowrap; }
+.h-cell .alch-inline { font-family:'EB Garamond',serif; font-size:15px; color:var(--rubric); margin-right:8px; opacity:0.75; }
+
+/* ── WRITINGS (essay teasers / index) ── */
+.writ { padding:89px 55px; max-width:1100px; margin:0 auto; border-bottom:1px solid var(--rule); }
+.writ-grid { display:grid; grid-template-columns:repeat(2,1fr); column-gap:55px; row-gap:13px; }
+.essay { padding:21px 0; border-bottom:1px dotted var(--rule); display:grid; grid-template-columns:34px 1fr; gap:18px; align-items:start; }
+.essay .n { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:24px; color:var(--rubric); line-height:1.2; font-weight:500; }
+.essay h3 { font-family:'Cormorant Garamond',serif; font-weight:500; font-size:24px; margin:0 0 6px; line-height:1.2; font-style:italic; }
+.essay h3:hover { color:var(--rubric); cursor:pointer; }
+.essay .date { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:0.24em; color:var(--mute); text-transform:uppercase; margin-bottom:8px; }
+.essay p { font-size:16px; line-height:1.55; color:var(--sepia); margin:0; font-style:italic; }
+.essay a { display:block; }
+
+/* ── GATE / VOWS ── */
+.gate { padding:89px 55px; max-width:1100px; margin:0 auto; border-bottom:1px solid var(--rule); }
+.gate-inner { display:grid; grid-template-columns:1fr 1fr; gap:55px; align-items:center; }
+.gate-text .rubric-line { margin-bottom:21px; }
+.gate-text h2 { font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:500; font-size:56px; margin:0 0 21px; line-height:1.05; letter-spacing:-0.02em; color:var(--ink); }
+.gate-text h2 em { color:var(--rubric); }
+.gate-text > p { font-size:19px; line-height:1.65; color:var(--sepia); margin:0 0 21px; font-style:italic; }
+.gate-sketch { position:relative; padding:13px; }
+.gate-sketch svg.fig { width:100%; height:auto; display:block; aspect-ratio:1/1.05; }
+.gate-sketch .marg { position:absolute; font-family:'Caveat',cursive; color:var(--sepia2); font-size:17px; }
+.gate-sketch .m1 { top:8%; right:0; transform:rotate(4deg); }
+.gate-sketch .m2 { bottom:13%; left:-8px; transform:rotate(-2deg); max-width:160px; }
+
+/* ── EXPLICIT (footer) ── */
+.explicit { padding:55px 55px 34px; max-width:1346px; margin:0 auto; }
+.explicit .ornament { font-size:24px; margin-bottom:21px; }
+.explicit-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:34px; padding:34px 0; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); }
+.ec h4 { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.24em; text-transform:uppercase; color:var(--rubric); margin:0 0 13px; font-weight:500; }
+.ec a, .ec p { font-family:'EB Garamond',serif; font-size:15px; color:var(--sepia); display:block; margin-bottom:6px; font-style:italic; }
+.ec a:hover { color:var(--rubric); }
+.ec p { font-style:normal; color:var(--mute); }
+.closing { text-align:center; margin-top:34px; }
+.closing .line { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:18px; color:var(--ink); margin-bottom:8px; }
+.closing .mirror-line { font-family:'Caveat',cursive; font-size:16px; color:var(--sepia2); display:inline-block; margin-top:8px; }
+.closing .lic { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:0.24em; color:var(--mute); text-transform:uppercase; margin-top:13px; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   LONG-READ (writings/[essay].html)
+   ─────────────────────────────────────────────────────────────────
+   Used by essay pages. Drop cap, marginalia, footnotes, end-mark.
+   ═══════════════════════════════════════════════════════════════════ */
+
+.longread { max-width:1200px; margin:0 auto; padding:89px 55px 55px; display:grid; grid-template-columns:240px minmax(0,640px) 240px; column-gap:55px; align-items:start; position:relative; }
+.longread .lr-pre { grid-column:2; }
+.longread .lr-pre .rubric-line { margin-bottom:21px; }
+.longread .lr-pre .lr-meta { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.26em; color:var(--mute); text-transform:uppercase; margin-bottom:13px; }
+.longread h1.lr-title { grid-column:2; font-family:'Cormorant Garamond',serif; font-weight:500; font-style:italic; font-size:72px; line-height:0.96; margin:0 0 13px; color:var(--ink); letter-spacing:-0.02em; }
+.longread .lr-deck { grid-column:2; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:24px; line-height:1.35; color:var(--sepia); margin:0 0 34px; }
+.longread .lr-deck em { color:var(--rubric); }
+.longread .lr-byline { grid-column:2; display:flex; gap:21px; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.24em; color:var(--mute); text-transform:uppercase; padding:13px 0; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); margin-bottom:34px; }
+.longread .lr-byline b { font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:500; font-size:14px; letter-spacing:0.02em; color:var(--ink); text-transform:none; }
+
+.lr-body { grid-column:2; font-family:'EB Garamond',serif; font-size:19px; line-height:1.75; color:var(--ink); }
+.lr-body p { margin:0 0 21px; }
+.lr-body p:first-of-type::first-letter {
+  font-family:'Cormorant Garamond',serif; font-weight:500; font-size:108px; line-height:0.85; float:left;
+  padding:8px 13px 0 0; color:var(--rubric); font-style:italic;
+}
+.lr-body h2 { font-family:'Cormorant Garamond',serif; font-weight:500; font-style:italic; font-size:34px; line-height:1.15; margin:55px 0 13px; color:var(--ink); letter-spacing:-0.01em; }
+.lr-body h2::before { content:"§ "; color:var(--rubric); font-style:italic; }
+.lr-body h3 { font-family:'Cormorant Garamond',serif; font-weight:500; font-style:italic; font-size:24px; margin:34px 0 8px; color:var(--ink); }
+.lr-body blockquote { margin:34px 0; padding:0 0 0 21px; border-left:2px solid var(--rubric); font-family:'EB Garamond',serif; font-style:italic; font-size:21px; line-height:1.55; color:var(--sepia); }
+.lr-body blockquote cite { display:block; margin-top:13px; font-family:'Caveat',cursive; font-style:normal; font-size:17px; color:var(--sepia2); }
+.lr-body blockquote cite::before { content:"— "; }
+.lr-body em { color:var(--rubric); font-style:italic; }
+.lr-body strong { font-weight:500; color:var(--ink); }
+.lr-body hr { border:none; text-align:center; margin:34px 0; height:auto; }
+.lr-body hr::before { content:"✦   ❦   ✦"; color:var(--rubric); letter-spacing:0.6em; font-size:14px; }
+.lr-body .lr-lede { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:24px; line-height:1.4; color:var(--sepia); margin:0 0 34px; }
+.lr-body .lr-lede em { color:var(--rubric); }
+.lr-body a.fn-ref { color:var(--rubric); font-size:0.7em; vertical-align:super; line-height:0; padding:0 1px; }
+.lr-body a.fn-ref:hover { color:var(--ink); }
+
+/* marginalia (positioned in left or right column at scroll) */
+.longread .lr-marg { font-family:'Caveat',cursive; font-size:17px; color:var(--sepia2); line-height:1.3; }
+.longread .lr-marg-left { grid-column:1; justify-self:end; max-width:200px; text-align:right; padding-top:8px; }
+.longread .lr-marg-right { grid-column:3; max-width:200px; padding-top:8px; }
+.longread .lr-marg b { display:block; font-family:'EB Garamond',serif; font-style:italic; font-weight:500; color:var(--rubric); font-size:14px; letter-spacing:0.04em; margin-bottom:4px; }
+
+/* footnotes */
+.lr-foot { grid-column:2; margin-top:55px; padding-top:21px; border-top:1px solid var(--rule); }
+.lr-foot h4 { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.26em; color:var(--rubric); text-transform:uppercase; margin:0 0 13px; font-weight:500; }
+.lr-foot ol { margin:0; padding-left:34px; font-family:'EB Garamond',serif; font-size:15px; line-height:1.55; color:var(--sepia); }
+.lr-foot ol li { margin-bottom:8px; }
+.lr-foot ol li::marker { color:var(--rubric); font-family:'Cormorant Garamond',serif; font-style:italic; }
+.lr-foot ol li em { color:var(--rubric); font-style:italic; }
+
+/* end mark */
+.lr-endmark { grid-column:2; text-align:center; margin:34px 0 0; color:var(--rubric); font-family:'Cormorant Garamond',serif; font-style:italic; font-size:24px; letter-spacing:0.4em; }
+.lr-endmark::before { content:"❦"; }
+
+/* ── PRINT ── */
+@media print {
+  body::before, body::after { display:none; }
+  header, footer, nav { display:none !important; }
+  body { background:#fff; color:#000; font-size:11pt; }
+  .longread { padding:0; column-gap:0; grid-template-columns:1fr; max-width:none; }
+  .longread > * { grid-column:1 !important; }
+  .lr-marg { display:none; }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width:980px) {
+  header { flex-direction:column; align-items:flex-start; padding:21px 34px 13px; gap:13px; }
+  .incipit, .gate-inner, .spread { grid-template-columns:1fr; padding:34px; gap:34px; }
+  .incipit h1 { font-size:64px; }
+  .disc-grid { grid-template-columns:1fr; }
+  .h-grid { grid-template-columns:repeat(2,1fr); }
+  .writ-grid { grid-template-columns:1fr; }
+  .explicit-grid { grid-template-columns:repeat(2,1fr); }
+  .longread { grid-template-columns:1fr; padding:55px 34px; }
+  .longread > * { grid-column:1; }
+  .longread h1.lr-title { font-size:48px; }
+  .lr-marg { font-style:italic; padding:13px 21px; border-left:2px solid var(--rubric); margin:21px 0; text-align:left !important; max-width:none !important; justify-self:start !important; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   NOCTURNE · the second mode
+   Same hues, inverted lightness. The vellum becomes tallow-lit ink.
+   Applies to ANY element carrying [data-mode="nocturne"], so a single
+   specimen can be shown in nocturne inside a vellum page.
+   Rubric, gold and mute are lifted. Every token is held at or above
+   4.5:1 against --paper (#17100a) because rubric and mute are used
+   almost exclusively at 9-10px — .rubric-line, .folio, .citation,
+   .h-cell .ord, nav a:hover — so the 3:1 large-text allowance never
+   applies. Measured: rubric 4.60, mute 4.61, sepia3 5.05, gold 7.07,
+   sepia2 7.77, sepia 11.67, ink 15.31.
+   ═══════════════════════════════════════════════════════════════════ */
+[data-mode="nocturne"] {
+  --paper:#17100a; --paper2:#1f160c; --paper3:#2c1f10;
+  --sepia:#dbcaa6; --sepia2:#b9a47c; --sepia3:#95825d;
+  --rule:#6b5230; --rubric:#ca5c43; --gold:#c9954a;
+  --mute:#8f7b56; --ink:#f2e7cb;
+}
+/* the foxing becomes lamplight rather than stain */
+html[data-mode="nocturne"] body::before {
+  background-image:
+    radial-gradient(ellipse at 15% 8%, rgba(201,149,74,0.10) 0, transparent 38%),
+    radial-gradient(ellipse at 92% 92%, rgba(196,85,60,0.07) 0, transparent 42%),
+    radial-gradient(ellipse at 75% 25%, rgba(214,168,92,0.08) 0, transparent 28%),
+    radial-gradient(ellipse at 50% 50%, transparent 45%, rgba(0,0,0,0.45) 100%);
+}
+html[data-mode="nocturne"] body::after { mix-blend-mode:screen; opacity:0.26; }
+/* SVG figure strokes need no change — they are all var()-driven */
+
+/* ── MODE TOGGLE ─────────────────────────────────────────────────
+   A sun/moon pair set in the header. Never an emoji; the glyphs are
+   the alchemical sol and luna. */
+.mode-toggle { display:inline-flex; align-items:center; gap:7px; border:1px solid var(--rule); padding:3px 9px; cursor:pointer; background:transparent; color:var(--sepia2); font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.22em; text-transform:uppercase; line-height:1; }
+.mode-toggle:hover { border-color:var(--rubric); color:var(--rubric); }
+.mode-toggle .gl { font-size:13px; line-height:1; }
+.mode-toggle .lab { opacity:0.75; }
+
+/* ── DONATE · sustineo ────────────────────────────────────────────
+   The only outbound commercial link on the site. It is set as a
+   plate, not a banner: no urgency, no progress bar, no suggested
+   amounts shouting. */
+.sustain { max-width:780px; margin:0 auto; padding:89px 55px; position:relative; }
+.sustain .amt-row { display:flex; gap:13px; flex-wrap:wrap; margin:34px 0 21px; }
+.sustain .amt { border:1px solid var(--rule); padding:13px 21px; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:22px; color:var(--ink); background:transparent; cursor:pointer; line-height:1; }
+.sustain .amt:hover { border-color:var(--rubric); color:var(--rubric); }
+.sustain .amt small { display:block; font-family:'IBM Plex Mono',monospace; font-style:normal; font-size:9px; letter-spacing:0.2em; color:var(--mute); text-transform:uppercase; margin-top:7px; }
+.ledger { border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); padding:21px 0; margin:34px 0; display:grid; grid-template-columns:repeat(3,1fr); gap:21px; }
+.ledger div { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--mute); }
+.ledger div b { display:block; font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:500; font-size:21px; letter-spacing:0; text-transform:none; color:var(--ink); margin-bottom:5px; }
+
+/* ── NOT FOUND · folio non inventa ────────────────────────────── */
+.notfound { max-width:680px; margin:0 auto; padding:144px 55px; text-align:center; position:relative; }
+.notfound .code { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.4em; color:var(--rubric); text-transform:uppercase; margin-bottom:34px; }
+.notfound h1 { font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:500; font-size:72px; line-height:1; margin:0 0 21px; color:var(--ink); }
+.notfound .lat { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:21px; color:var(--sepia2); margin-bottom:13px; }
+
+/* ── DRAFT MARKER ─────────────────────────────────────────────────
+   Anything the order has not yet set its hand to. */
+.draft { position:relative; }
+.draft::after { content:"DRAFT"; position:absolute; top:-9px; right:-9px; font-family:'IBM Plex Mono',monospace; font-size:8px; letter-spacing:0.24em; color:var(--rubric); border:1px solid var(--rubric); padding:2px 5px; background:var(--paper); }
+
+/* buttons never wrap mid-label */
+.btn-illumin { white-space:nowrap; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   THE FRONT DOOR · blocks for /, /visit, /believe
+   Everything below was inline in §007 of the pattern sheet, because a
+   specimen sheet demonstrates rather than ships. Lifted to real
+   classes here so the production pages carry no style attributes.
+   Named from the vocabulary: the hero is still an incipit, the door is
+   a modifier on it. /sustain and /404 need nothing — .sustain and
+   .notfound are already in this file, above.
+   Spacing stays on the sequence: 8 13 21 34 55 89 144.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* header right group — nav plus the mode toggle, per § 003.
+   header is space-between, so nav and toggle must travel together
+   or the toggle drifts into the middle of the bar. */
+.chrome-right { display:flex; align-items:center; gap:21px; flex:0 0 auto; }
+
+/* ── / · the door ──────────────────────────────────────────────────
+   A quieter incipit than the codex: wider gutters, no rule beneath,
+   optically centred rather than top-aligned. Inherits h1 colour,
+   family and the .amp rubric ampersand from .incipit above, and
+   inherits the 980px collapse (and its 64px h1) from the media
+   query above. */
+.incipit.door {
+  padding:110px 55px 55px; max-width:1100px; gap:89px;
+  align-items:center; border-bottom:none;
+}
+.incipit.door h1 { font-size:92px; line-height:0.92; letter-spacing:-0.025em; margin:0 0 34px; }
+.incipit.door .lede {
+  font-family:'Cormorant Garamond',serif; font-style:italic;
+  font-size:24px; line-height:1.45; color:var(--sepia);
+  margin:0 0 21px; max-width:440px;
+}
+.incipit.door .lede em { color:var(--rubric); }
+/* the plain second line beneath the lede · who, where, when */
+.incipit.door .lede-plain {
+  font-size:18px; line-height:1.6; color:var(--sepia);
+  margin:0 0 34px; max-width:440px;
+}
+.door-cta { display:flex; gap:21px; align-items:center; flex-wrap:wrap; }
+.door-cta .or { font-family:'Caveat',cursive; font-size:18px; color:var(--sepia2); }
+
+/* the figure column · marginalia in the hand */
+.fig-wrap { position:relative; }
+.fig-wrap > svg { width:100%; height:auto; display:block; }
+.annot {
+  position:absolute; font-family:'Caveat',cursive;
+  color:var(--sepia2); font-size:16px; line-height:1.2;
+  pointer-events:none;
+}
+.annot.a1 { top:6%; left:-8px; transform:rotate(-3deg); }
+.annot.a2 { bottom:8%; right:0; text-align:right; max-width:120px; transform:rotate(2deg); }
+
+/* who, when, where · the three things a first-time visitor asks */
+.door-notes { max-width:1100px; margin:0 auto; padding:0 55px; }
+.door-notes .ledger div b a:hover { color:var(--rubric); }
+
+/* the strip already draws a rule above the closing line */
+.door-notes + .closing { border-top:none; }
+
+/* the closing statement · the last word before the explicit */
+.closing {
+  border-top:1px solid var(--rule); max-width:820px;
+  margin:0 auto; padding:55px; text-align:center;
+}
+.closing .line {
+  font-family:'Cormorant Garamond',serif; font-style:italic;
+  font-size:21px; color:var(--sepia); margin-bottom:13px;
+}
+
+/* ── /visit, /believe · the leaf ───────────────────────────────────
+   One readable column of plain prose. Every leaf ends somewhere a
+   visitor can act: a way to write, or a way to come. */
+.leaf { max-width:760px; margin:0 auto; padding:89px 55px 55px; position:relative; }
+.leaf h1 {
+  font-family:'Cormorant Garamond',serif; font-style:italic;
+  font-weight:500; font-size:64px; line-height:1;
+  margin:0 0 21px; color:var(--ink);
+}
+.leaf h2 {
+  font-family:'Cormorant Garamond',serif; font-style:italic;
+  font-weight:500; font-size:34px; line-height:1.1;
+  margin:55px 0 13px; color:var(--ink);
+}
+.leaf .statement {
+  font-family:'Cormorant Garamond',serif; font-style:italic;
+  font-size:22px; line-height:1.45; color:var(--sepia); max-width:560px;
+}
+.leaf .statement em { color:var(--rubric); }
+.leaf .body, .leaf > p { font-size:18px; line-height:1.7; color:var(--sepia); max-width:560px; }
+.leaf .aside { font-family:'Caveat',cursive; font-size:20px; color:var(--sepia2); margin:34px 0; }
+.leaf .verses { margin:34px 0; }
+/* no drop cap here · each tenet opens on an italic name, and a dropped
+   first letter splits that name in two */
+.leaf .verses .verse:first-of-type p::first-letter { float:none; font-size:inherit; line-height:inherit; padding:0; }
+.leaf ul.plain { padding-left:21px; max-width:560px; font-size:18px; line-height:1.7; color:var(--sepia); }
+.leaf ul.plain li { margin-bottom:8px; }
+.leaf ul.plain li::marker { color:var(--rubric); }
+.leaf ul.plain b { font-weight:500; color:var(--ink); }
+
+/* an inline email link */
+.mail { color:var(--rubric); border-bottom:1px solid currentColor; }
+.mail:hover { color:var(--ink); }
+
+/* an English line set beneath a Latin one */
+.gloss { display:block; font-family:'EB Garamond',serif; font-style:italic; font-size:0.85em; color:var(--mute); }
+
+/* ── narrow ────────────────────────────────────────────────────────
+   The header stacks at 980px above, so the toggle group unhooks from
+   the right edge and sits under the sigil with the nav. */
+@media (max-width:980px) {
+  .chrome-right { width:100%; flex-wrap:wrap; gap:13px; }
+  .incipit.door { padding:55px 34px; }
+  .leaf { padding:55px 34px; }
+  .door-notes { padding:0 34px; }
+  .ledger { grid-template-columns:1fr; }
+  /* four nav items no longer fit one line on a phone */
+  nav { flex-wrap:wrap; white-space:normal; row-gap:4px; flex:1 1 100%; }
+  .explicit .ornament { letter-spacing:0.2em; }
+  .leaf h1 { font-size:48px; }
+  .closing { padding:34px; }
+}
+
+/* 44px minimum tap target on everything touchable, per § 008 */
+@media (pointer:coarse) {
+  nav a, .mode-toggle, .sustain .amt, .btn-illumin { min-height:44px; }
+  .mode-toggle, .sustain .amt { display:inline-flex; align-items:center; }
+  nav a { display:inline-flex; align-items:center; }
+}
+
+/* skip link — the placeholder site had one and claimed AA; keeping it.
+   Off-canvas until focused, then it lands as an ordinary illuminated
+   button in the top-left. */
+.skip {
+  position:absolute; left:-9999px; top:0; z-index:99;
+  font-family:'IBM Plex Mono',monospace; font-size:10px;
+  letter-spacing:0.22em; text-transform:uppercase;
+  background:var(--paper); color:var(--rubric);
+  border:1px solid var(--rubric); padding:13px 21px;
+}
+.skip:focus { left:13px; top:13px; }
+
+/* chosen amount · no default selection, per the brief — the state only
+   exists once the visitor has actually judged an amount */
+.sustain .amt[aria-pressed="true"] { border-color:var(--rubric); color:var(--rubric); }
+
+/* a primary button with nowhere to go yet. Visible, so an unconfigured
+   Zeffy link cannot ship quietly. */
+.btn-illumin[aria-disabled="true"] {
+  opacity:0.45; cursor:not-allowed; background:transparent;
+  color:var(--sepia2); border-color:var(--rule);
+}
+.btn-illumin[aria-disabled="true"]:hover { background:transparent; color:var(--sepia2); }
+.sustain .pending {
+  font-family:'IBM Plex Mono',monospace; font-size:10px;
+  letter-spacing:0.22em; text-transform:uppercase;
+  color:var(--rubric); margin-top:13px;
+}
+
+/* the hand · a Caveat note where an emoji would otherwise be reached for */
+.sustain .note-hand { font-family:'Caveat',cursive; font-size:19px; color:var(--sepia2); margin-top:21px; }
+
+/* ── /sustain · type ──────────────────────────────────────────────
+   .sustain sets the measure and the amount row above, but the pattern
+   sheet carried this heading's type inline, so without these rules the
+   h1 falls back to upright body serif — and headings in this system are
+   always italic. That is the most identifying decision in the whole
+   vocabulary; do not let it regress. */
+.sustain h1 {
+  font-family:'Cormorant Garamond',serif; font-style:italic;
+  font-weight:500; font-size:56px; line-height:1.02;
+  margin:0 0 21px; color:var(--ink);
+}
+.sustain > p:not(.note-hand) { font-size:18px; line-height:1.7; color:var(--sepia); max-width:560px; margin:0; }
+.sustain > p:not(.note-hand) + p:not(.note-hand) { margin-top:13px; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   PRINT · ink on paper
+   The skeleton earlier in this file was written for /codex and the
+   longread, and it had never been run. Two things were wrong with it
+   for the front-door pages, both found by actually printing them:
+
+   1. It sets `body { color:#000 }`, which changes nothing — every
+      element takes its colour from a token, not from inheritance. So
+      printing while in nocturne produced cream-on-white: --ink is
+      #f2e7cb there, and the h1 came out very nearly invisible.
+   2. The two-column incipit never collapsed, so the figure was pushed
+      onto a page of its own with the text stranded on the one before.
+
+   This block therefore RESETS THE TOKENS rather than the inherited
+   colour, and it has to sit at the end of the file: the nocturne block
+   above is later in source order than the old @media print, so a reset
+   placed up there loses the cascade. `html[data-mode="nocturne"]` also
+   outranks the bare attribute selector on specificity, so the reset
+   holds whichever mode the visitor happened to be reading in.
+
+   The rubric stays a dark rust rather than going flat black — it is
+   load-bearing in this design, and it greys out legibly on a mono
+   printer while still reading as an accent in colour.
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media print {
+
+  /* ── tokens · whichever mode was on screen ───────────────────────── */
+  html,
+  html[data-mode="vellum"],
+  html[data-mode="nocturne"] {
+    --paper:#fff; --paper2:#fff; --paper3:#fff;
+    --sepia:#1a1a1a; --sepia2:#333; --sepia3:#555;
+    --rule:#999; --rubric:#7a2415; --gold:#6b4a1a;
+    --mute:#555; --ink:#000;
+  }
+
+  @page { margin:18mm 16mm; }
+
+  body { background:#fff; font-size:11pt; line-height:1.55; }
+
+  /* ── keep the identity, drop the controls ────────────────────────── */
+  /* The old rule hid the whole header, which left a printed page with
+     no indication of whose it is. The sigil and the name are worth the
+     ink; the nav and the mode toggle are not. */
+  header { display:flex !important; padding:0 0 13px; margin-bottom:21px; }
+  .chrome-right, nav, .mode-toggle { display:none !important; }
+
+  /* Dead on paper — a button that cannot be pressed is just wasted ink.
+     The amount row STAYS, though: $21 / $55 / $144 is information about
+     what the Foundry asks for, not merely a control. It reads as a
+     printed list of suggested amounts. */
+  .skip, .door-cta, #give, .sustain .pending,
+  .btn-illumin { display:none !important; }
+  .sustain .amt { border-color:var(--rule); }
+
+  /* ── the incipit collapses ───────────────────────────────────────── */
+  .incipit, .incipit.door {
+    display:block !important; padding:0; max-width:none; border-bottom:none;
+  }
+  .incipit.door h1 { font-size:40pt; margin-bottom:13px; }
+  .incipit.door .lede { font-size:14pt; max-width:none; }
+
+  /* the figure is the artwork, so it prints — but sized to sit with the
+     text rather than claiming a sheet of its own */
+  .fig-wrap { max-width:78mm; margin:21px auto 0; page-break-inside:avoid; break-inside:avoid; }
+  .annot { display:none; }   /* rotated absolutes collide once reflowed */
+
+  .closing { max-width:none; padding:21px 0 0; }
+  .leaf { max-width:none; padding:0; }
+  .sustain { max-width:none; padding:0; }
+  .notfound { padding:34px 0; }
+
+  /* ── do not break these across sheets ────────────────────────────── */
+  .ledger, .ledger div, .explicit, .plate, .h-cell {
+    page-break-inside:avoid; break-inside:avoid;
+  }
+  h1, h2, h3, .rubric-line {
+    page-break-after:avoid; break-after:avoid;
+  }
+  p, .leaf .body { orphans:2; widows:2; }
+
+  /* ── the explicit is the colophon · keep it, narrow it ───────────── */
+  .explicit { padding:21px 0 0; max-width:none; border-top:1px solid var(--rule); }
+  .explicit-grid { grid-template-columns:repeat(2,1fr) !important; }
+  .explicit .ornament { font-size:14pt; margin-bottom:13px; }
+}

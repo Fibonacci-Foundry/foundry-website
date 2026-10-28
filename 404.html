@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Not found · Fibonacci Foundry</title>
+<meta name="robots" content="noindex">
+<!-- NOTE · the one page whose asset paths are root-absolute, not relative.
+     GitHub Pages serves this file for any missing path at any depth
+     (/a/b/c renders 404.html while the address bar still reads /a/b/c),
+     so relative hrefs would resolve against /a/b/ and fetch nothing.
+     The house rule is relative paths; this is the documented exception. -->
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+<script>(function(){try{var m=localStorage.getItem('ff-mode');if(!m&&window.matchMedia){m=window.matchMedia('(prefers-color-scheme: dark)').matches?'nocturne':'vellum';}document.documentElement.dataset.mode=m||'vellum';}catch(e){document.documentElement.dataset.mode='vellum';}})();</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles/codex.css">
+</head>
+<body>
+
+<a class="skip" href="#main">skip to content</a>
+
+<!-- ── CHROME · identical on every route ── -->
+<header>
+  <div class="sigil">
+    <svg viewBox="0 0 50 50" aria-hidden="true">
+      <g class="stroke-thin" stroke-width="0.8"><circle cx="25" cy="25" r="22"/><circle cx="25" cy="25" r="18" stroke-dasharray="1 2"/></g>
+      <g class="stroke" stroke-width="1.1"><rect x="8" y="28" width="17" height="17"/><rect x="25" y="28" width="10" height="10"/><rect x="25" y="38" width="6" height="6"/><rect x="8" y="5" width="27" height="23"/></g>
+      <path class="stroke-rubric" stroke-width="1.4" d="M8 45 Q8 28 25 28 Q35 28 35 38 Q35 45 31 45 Q28 45 28 42"/>
+    </svg>
+    <div class="nm">Fibonacci Foundry<small>· A CHURCH IN THE APPALACHIAN MOUNTAINS ·</small></div>
+  </div>
+  <div class="chrome-right">
+    <nav>
+      <a href="/index.html">Welcome</a>
+      <a href="/believe.html">What we believe</a>
+      <a href="/visit.html">Visit</a>
+      <a href="/sustain.html">Give</a>
+    </nav>
+    <button class="mode-toggle" type="button" aria-pressed="false"><span class="gl">☉</span><span class="lab">vellum</span></button>
+  </div>
+</header>
+
+<main id="main">
+<section class="notfound">
+  <div class="code">FOL. non inventa · 404</div>
+  <h1>This leaf is<br/>not in the book.</h1>
+  <div class="lat">quod quaeris hic non est.<span class="gloss">what you are looking for is not here.</span></div>
+  <a href="/" class="btn-illumin primary">Return home</a>
+</section>
+</main>
+
+<!-- ── EXPLICIT · the close of the book ── -->
+<div class="explicit">
+  <div class="ornament" aria-hidden="true">❦ &nbsp; ✦ &nbsp; ✠ &nbsp; ✦ &nbsp; ❦</div>
+  <div class="explicit-grid">
+    <div class="ec"><h4>The Foundry</h4><p>A church in the Appalachian Mountains. We build in person, teach each other, and hold the work in common.</p></div>
+    <div class="ec"><h4>Visit</h4><a href="/visit.html">come to a gathering →</a><a href="mailto:hello@fibonaccifoundry.org">hello@fibonaccifoundry.org</a></div>
+    <div class="ec"><h4>Learn &amp; give</h4><a href="/believe.html">what we believe →</a><a href="/sustain.html">support the work →</a></div>
+    <div class="ec"><h4>Colophon</h4><p>Appalachian Mountains<br/>A 501(c)(3) church · Anno MMXXVI</p><p><i>ora et labora</i></p></div>
+  </div>
+</div>
+
+<script src="/scripts/mode.js"></script>
+</body>
+</html>
